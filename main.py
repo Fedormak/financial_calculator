@@ -2,7 +2,7 @@ import sys
 
 
 from PyQt6 import uic, QtCore
-from PyQt6.QtWidgets import QApplication, QMainWindow, QLineEdit, QLabel, QGridLayout
+from PyQt6.QtWidgets import QApplication, QMainWindow, QLineEdit, QLabel, QGridLayout, QPushButton
 
 from dataBD import dataBD
 from windows.windowsCredit import WindowsCredit
@@ -20,14 +20,18 @@ class mainWindows(QMainWindow):
 
     def initUI(self):
         if self.user is None:
-            self.label = QLabel(self)
-            self.label.setText("Ваше имя сэр?")
-            self.user_registr = QLineEdit(self)
-            self.user_registr.textChanged.connect(self.regiserName)
-            self.user_registr.move(100, 100)
+            # self.label = QLabel(self)
+            # self.label.setText("Ваше имя сэр?")
+            # self.user_registr = QLineEdit(self)
+            # self.logInbut = QPushButton("login", self)
+            uic.loadUi("./ui/login.ui", self)
+            self.logInbut.clicked.connect(self.regiserName)
 
-            self.setFixedSize(300, 300)
-            self.setWindowTitle('Log in')
+            # self.logInbut.move(120, 120)
+            # self.user_registr.move(100, 100)
+            #
+            # self.setFixedSize(300, 300)
+            # self.setWindowTitle('Log in')
 
         else:
             uic.loadUi("./ui/mainWindows.ui", self)
@@ -35,9 +39,17 @@ class mainWindows(QMainWindow):
             self.MovePercent.clicked.connect(self.MovePercentfunc)
             self.MovePlan.clicked.connect(self.MovePlanfunc)
 
-    def regiserName(self, text):
-        if self.bd.searchUser(text):
-            self.user = text
+    def regiserName(self):
+        if self.bd.searchUser(self.user_registr.text()):
+            self.user = self.user_registr.text()
+
+            uic.loadUi("./ui/mainWindows.ui", self)
+            self.MoveCredit.clicked.connect(self.MoveCreditfunc)
+            self.MovePercent.clicked.connect(self.MovePercentfunc)
+            self.MovePlan.clicked.connect(self.MovePlanfunc)
+        else:
+            self.label.setText("Error")
+
 
 
     def MoveCreditfunc(self):

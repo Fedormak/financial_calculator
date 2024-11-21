@@ -16,8 +16,8 @@ class WindowsCredit(QMainWindow):
 
         self.count = QLabel()
         self.slider = QSlider(QtCore.Qt.Orientation.Horizontal)
-        self.slider.setMinimum(0)
-        self.slider.setMaximum(100)
+        self.slider.setMinimum(-2000000)
+        self.slider.setMaximum(2000000)
 
         self.setCentralWidget(self.count)
         self.setCentralWidget(self.slider)

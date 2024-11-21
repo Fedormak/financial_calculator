@@ -8,7 +8,7 @@ class dataBD():
 
     def searchUser(self, userName):
         result = self.cur.execute("""SELECT * FROM users_date
-                    WHERE user_name = ?""", (userName)).fetchall()
+                    WHERE user_name = ?""", (userName,)).fetchall()
         if len(result) > 0:
             return True
         else:
