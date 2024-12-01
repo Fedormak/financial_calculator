@@ -1,6 +1,6 @@
 import sys
 from PyQt6 import uic, QtCore
-from PyQt6.QtWidgets import QApplication, QMainWindow, QWidget, QPushButton, QSlider, QAbstractSlider, QLabel
+from PyQt6.QtWidgets import QMainWindow, QPushButton, QSlider, QLabel, QGridLayout
 
 
 class WindowsCredit(QMainWindow):
@@ -14,17 +14,27 @@ class WindowsCredit(QMainWindow):
         self.setGeometry(300, 300, 400, 400)
         self.setWindowTitle('Кредит')
 
-        self.count = QLabel()
-        self.slider = QSlider(QtCore.Qt.Orientation.Horizontal)
-        self.slider.setMinimum(-2000000)
-        self.slider.setMaximum(2000000)
+        self.grid = QGridLayout()
 
-        self.setCentralWidget(self.count)
-        self.setCentralWidget(self.slider)
+        # WindowsCredit.setLayout(self.grid)
 
-        self.backToMainbtn = QPushButton(self)
+        self.backToMainbtn = QPushButton()
         self.backToMainbtn.setText("return")
         self.backToMainbtn.clicked.connect(self.ReturnToMain)
+
+        self.slider = QSlider(QtCore.Qt.Orientation.Horizontal)
+        self.slider.setRange(-2000000, 2000000)
+        # self.slider.setGeometry(70, 70, 100, 30)
+        self.slider.setValue(50)
+        self.slider.setSingleStep(100)
+        self.slider.setPageStep(10)
+        self.slider.setTickInterval(10000)
+        self.slider.setTickPosition(QSlider.TickPosition.TicksBelow)
+
+        self.grid.addWidget(self.backToMainbtn, 0, 0)
+        self.grid.addWidget(self.slider, 1, 0)
+
+        self.show()
 
     def ReturnToMain(self):
         WindowsCredit.close(self)

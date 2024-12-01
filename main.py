@@ -13,25 +13,16 @@ from windows.windowsPlan import WindowsPlan
 class mainWindows(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.user = None
+        self.user = "Makarov" #ИЗМЕНИТЬ ДЛЯ РЕГЕСТАЦИИ НА NONE
         self.bd = dataBD()
 
         self.initUI()
 
     def initUI(self):
         if self.user is None:
-            # self.label = QLabel(self)
-            # self.label.setText("Ваше имя сэр?")
-            # self.user_registr = QLineEdit(self)
-            # self.logInbut = QPushButton("login", self)
             uic.loadUi("./ui/login.ui", self)
             self.logInbut.clicked.connect(self.regiserName)
 
-            # self.logInbut.move(120, 120)
-            # self.user_registr.move(100, 100)
-            #
-            # self.setFixedSize(300, 300)
-            # self.setWindowTitle('Log in')
 
         else:
             uic.loadUi("./ui/mainWindows.ui", self)
@@ -49,7 +40,6 @@ class mainWindows(QMainWindow):
             self.MovePlan.clicked.connect(self.MovePlanfunc)
         else:
             self.label.setText("Error")
-
 
 
     def MoveCreditfunc(self):
