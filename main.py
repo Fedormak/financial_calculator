@@ -13,7 +13,7 @@ from windows.windowsPlan import WindowsPlan
 class mainWindows(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.user = "Makarov" #ИЗМЕНИТЬ ДЛЯ РЕГЕСТАЦИИ НА NONE
+        self.user = None
         self.bd = dataBD()
 
         self.initUI()
