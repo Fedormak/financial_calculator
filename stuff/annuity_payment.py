@@ -1,17 +1,11 @@
 
-class annuitypayment:
-    def _-
+class annuity_payment:
 
-    def kof_annuity(self):
-
-    def monthly_fee(self, sum_credit):
-        return sum_credit * self.kof_annuity
-
-    def monthlsdfy_fee(self, loan_amount=None, month=None, percent=None ):
+    def payment(self, sumCredit=None, month=None, percent=None ):
         percent = percent / 12
-        monthly_fee = loan_amount * (percent + percent / ((1 + percent) ** month - 1))
-        return monthly_fee
+        percent = percent / 100
+        kof = (percent * ((1 + percent) ** month)) / (((1 + percent) ** month) - 1)
+        payment = sumCredit * kof
+        return round(payment, 2)
 
 
-d = annuitypayment()
-print(d.monthly_fee(float(input()), float(input()), float(input())))

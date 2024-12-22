@@ -2,45 +2,53 @@ import sys
 from PyQt6 import uic, QtCore
 from PyQt6.QtWidgets import QMainWindow, QPushButton, QSlider, QLabel, QGridLayout
 
+from stuff.annuity_payment import annuity_payment
+
 
 class WindowsCredit(QMainWindow):
     def __init__(self, main_link, *args):
         super().__init__()
-        self.initUI()
-        self.year = 2024
+        self.month = 1
+        self.sumCredit = 500
         self.main_link = main_link
 
+
+        self.initUI()
+        self.number = annuity_payment()
+
     def initUI(self):
-        self.setGeometry(300, 300, 400, 400)
-        self.setWindowTitle('Кредит')
+        uic.loadUi("./ui/windowsCredit.ui", self)
 
-        self.grid = QGridLayout()
+        self.monthSlider.valueChanged.connect(self.monthSliderChenge)
 
-        # WindowsCredit.setLayout(self.grid)
+        self.sumCreditSlider.valueChanged.connect(self.sumCreditSliderChenge)
+        self.sumCreditSlider.setSingleStep(500)
+        self.sumCreditSlider.setPageStep(500)
+        self.sumCreditSlider.setMaximum(100000)
 
-        self.backToMainbtn = QPushButton()
-        self.backToMainbtn.setText("return")
+        self.reload()
+
+        self.calculate.clicked.connect(self.Calculate)
         self.backToMainbtn.clicked.connect(self.ReturnToMain)
 
-        self.slider = QSlider(QtCore.Qt.Orientation.Horizontal)
-        self.slider.setRange(-2000000, 2000000)
-        # self.slider.setGeometry(70, 70, 100, 30)
-        self.slider.setValue(50)
-        self.slider.setSingleStep(100)
-        self.slider.setPageStep(10)
-        self.slider.setTickInterval(10000)
-        self.slider.setTickPosition(QSlider.TickPosition.TicksBelow)
+    def reload(self):
+        self.monthSlider.setValue(self.month)
+        self.sumCreditSlider.setValue(self.sumCredit)
 
-        self.grid.addWidget(self.backToMainbtn, 0, 0)
-        self.grid.addWidget(self.slider, 1, 0)
+    def monthSliderChenge(self):
+        self.monthSliderNum.setText(f"{self.monthSlider.value()}")
 
-        self.show()
+    def sumCreditSliderChenge(self):
+        self.sumCreditSliderNum.setText(f"{self.sumCreditSlider.value()}")
 
     def ReturnToMain(self):
         WindowsCredit.close(self)
         self.main_link.show()
 
-    def slider_change(self):
-        self.year += 1
-        self.count.setText(f"{self.year}")
+    def Calculate(self):
+        payment = self.number.payment(sumCredit=self.sumCreditSlider.value(), month=self.monthSlider.value(),
+                            percent=self.percent.value())
+
+        self.payment.display(payment)
+
 
