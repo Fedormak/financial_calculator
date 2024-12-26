@@ -1,6 +1,5 @@
 import sys
 
-
 from PyQt6 import uic, QtCore
 from PyQt6.QtWidgets import QApplication, QMainWindow, QLineEdit, QLabel, QGridLayout, QPushButton
 
@@ -13,7 +12,7 @@ from windows.windowsPlan import WindowsPlan
 class mainWindows(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.user = "Makarov"
+        self.user = None
         self.bd = dataBD()
 
         self.initUI()
