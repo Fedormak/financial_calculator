@@ -2,22 +2,24 @@ import sys
 from PyQt6 import uic, QtCore
 from PyQt6.QtWidgets import QApplication, QMainWindow, QWidget, QPushButton, QSlider, QAbstractSlider, QLabel
 
+from dataBD import dataBD
 
 
-class WindowsPlan(QMainWindow):
+
+class WindowsCalculator(QMainWindow):
     def __init__(self, main_link,*args):
         super().__init__()
+        self.date = dataBD()
         self.initUI()
         self.main_link = main_link
 
     def initUI(self):
-        self.setGeometry(300, 300, 400, 400)
-        self.setWindowTitle('Вклад')
+        uic.loadUi("./ui/windowsUsers.ui", self)
+        print(self.date.allUser())
+        self.Users.addItems(self.date.allUser())
 
-        self.backToMainbtn = QPushButton(self)
-        self.backToMainbtn.setText("return")
         self.backToMainbtn.clicked.connect(self.ReturnToMain)
 
     def ReturnToMain(self):
-        WindowsPlan.close(self)
+        WindowsCalculator.close(self)
         self.main_link.show()

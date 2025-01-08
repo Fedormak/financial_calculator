@@ -14,30 +14,17 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="MovePercent">
+   <widget class="QPushButton" name="MoveCalculator">
     <property name="geometry">
      <rect>
       <x>280</x>
-      <y>290</y>
+      <y>400</y>
       <width>151</width>
       <height>141</height>
      </rect>
     </property>
     <property name="text">
-     <string>Вклад</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="MovePlan">
-    <property name="geometry">
-     <rect>
-      <x>160</x>
-      <y>480</y>
-      <width>151</width>
-      <height>141</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Планировщик</string>
+     <string>Пользователи</string>
     </property>
    </widget>
    <widget class="QLabel" name="label">
@@ -56,8 +43,8 @@
    <widget class="QPushButton" name="MoveCredit">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>290</y>
+      <x>50</x>
+      <y>400</y>
       <width>151</width>
       <height>141</height>
      </rect>

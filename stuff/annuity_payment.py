@@ -6,6 +6,7 @@ class annuity_payment:
         percent = percent / 100
         kof = (percent * ((1 + percent) ** month)) / (((1 + percent) ** month) - 1)
         payment = sumCredit * kof
-        return round(payment, 2)
+        overpayment = payment * month - sumCredit
+        return round(payment * 1000, 2), round(overpayment * 1000, 2)
 
 

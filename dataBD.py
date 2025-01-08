@@ -13,3 +13,16 @@ class dataBD():
             return True
         else:
             return False
+
+    def allUser(self):
+        result = self.cur.execute("""SELECT user_name FROM users_date""", ()).fetchall()
+        resultf = list()
+        for i in result:
+            i = str(i)
+            i = i.replace("(", "")
+            i = i.replace(")", "")
+            i = i.replace(",", "")
+            i = i.replace("'", "")
+            resultf.append(i)
+
+        return resultf

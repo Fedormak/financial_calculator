@@ -56,6 +56,8 @@ class WindowsCredit(QMainWindow):
         self.paid_off_text.setVisible(self.differ)
         self.paid_offHorizontalSlider.setVisible(self.differ)
         self.paid_offCount.setVisible(self.differ)
+        self.payment.setText(str(00000))
+        self.overpayments.setText(str(00000))
 
 
     def reload(self):
@@ -76,10 +78,13 @@ class WindowsCredit(QMainWindow):
         self.main_link.show()
 
     def Calculate(self):
-        payment = self.number.payment(sumCredit=self.sumCreditSlider.value(), month=self.monthSlider.value(),
+        if self.monthSlider.value() > self.paid_offHorizontalSlider.value():
+            payment, overpayment = self.number.payment(sumCredit=self.sumCreditSlider.value(), month=self.monthSlider.value(),
                             percent=self.percent.value(), pay_off=self.paid_offHorizontalSlider.value())
 
-        self.payment.display(payment)
-        self.payment_n.setText(str(payment))
+            self.payment.setText(str(payment))
 
-        self.overpayments.display(payment * self.monthSlider.value() - self.sumCreditSlider.value())
+            self.overpayments.setText(f"{overpayment}")
+        else:
+            self.payment.setText("Error")
+            self.overpayments.setText("Error")
